@@ -18,6 +18,6 @@ lerobot-eval \
   --eval.batch_size=1 \
   --eval.n_episodes=10 \
   --policy.path=HuggingFaceVLA/smolvla_libero \
-  --policy.n_action_steps=50 \
+  --policy.n_action_steps=10 \
   --env.max_parallel_tasks=1 \
   --policy.device=cuda
