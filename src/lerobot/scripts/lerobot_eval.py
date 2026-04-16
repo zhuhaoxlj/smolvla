@@ -170,6 +170,11 @@ def rollout(
 
         # Infer "task" from sub-environments (prefer natural language description).
         # env.call() works with both SyncVectorEnv and AsyncVectorEnv.
+
+
+        # Apply environment-specific preprocessing (e.g., LiberoProcessorStep for LIBERO)
+        observation = env_preprocessor(observation)
+        
         try:
             observation["task"] = list(env.call("task_description"))
         except (AttributeError, NotImplementedError):
@@ -177,9 +182,6 @@ def rollout(
                 observation["task"] = list(env.call("task"))
             except (AttributeError, NotImplementedError):
                 observation["task"] = [""] * env.num_envs
-
-        # Apply environment-specific preprocessing (e.g., LiberoProcessorStep for LIBERO)
-        observation = env_preprocessor(observation)
 
         observation = preprocessor(observation)
         with torch.inference_mode():

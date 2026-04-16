@@ -108,6 +108,11 @@ class EnvConfig(draccus.ChoiceRegistry, abc.ABC):
                 )
 
         def _make_one():
+            try:
+                import importlib
+                importlib.import_module(self.package_name)
+            except Exception:
+                pass
             return gym.make(self.gym_id, disable_env_checker=self.disable_env_checker, **self.gym_kwargs)
 
         extra_kwargs: dict = {}
@@ -229,7 +234,7 @@ class PushtEnv(EnvConfig):
             "obs_type": self.obs_type,
             "render_mode": self.render_mode,
             "visualization_width": self.visualization_width,
-            "visualization_height": self.visualization_height,
+            "visualization_height": self.visualization_height, "observation_width": self.observation_width, "observation_height": self.observation_height,
             "max_episode_steps": self.episode_length,
         }
 

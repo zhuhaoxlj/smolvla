@@ -175,3 +175,17 @@ We welcome contributions from everyone in the community! To get started, please 
 <div align="center">
 <sub>Built by the <a href="https://huggingface.co/lerobot">LeRobot</a> team at <a href="https://huggingface.co">Hugging Face</a> with ❤️</sub>
 </div>
+
+
+# run
+```bash
+lerobot-eval \
+  --output_dir=outputs/eval/smolvla_libero \
+  --env.type=libero \
+  --env.task=libero_spatial \
+  --eval.batch_size=1 \
+  --eval.n_episodes=10 \
+  --policy.path=HuggingFaceVLA/smolvla_libero \
+  --policy.n_action_steps=50 \
+  --env.max_parallel_tasks=1 \
+```
